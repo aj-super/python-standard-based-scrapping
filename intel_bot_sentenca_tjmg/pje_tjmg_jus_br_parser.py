@@ -1,8 +1,10 @@
 # -*- coding: UTF-8 -*-
 import sys
 import time
-reload(sys)
-sys.setdefaultencoding('utf8')
+# from importlib import reload
+
+# reload(sys)
+# sys.setdefaultencoding('utf8')
 import re
 import logging
 import urllib3
@@ -180,7 +182,8 @@ class Bot(object):
 
         soup = BeautifulSoup(response_peticionar.content, 'html.parser')
         jds = [i for i in soup.find_all('script') if 'concluirPeticionamento' in str(i)][0]['id']
-
+        import pdb;
+        pdb.set_trace()
         view_state = soup.find(id='javax.faces.ViewState')
         cid = soup.find("input", {"name":"cid"})['value']
 
@@ -251,33 +254,8 @@ class Bot(object):
         headers['Referer'] = peticionar_url
         headers['Origin'] = 'https://pje.tjmg.jus.br'
         response = self.session.post(popup_url, data=popup_data, headers=headers)
-        print(response)
 
-        # filter_dict['AJAXREQUEST'] = data['AJAXREQUEST']
-        # filter_dict['ipDescDecoration:ipDesc'] = 'Petição'
-        # filter_dict['javax.faces.ViewState'] = view_state['value']
-        # filter_dict['cbTDDecoration:cbTD'] = 13
-        # filter_dict['AJAX:EVENTS_COUNT'] = 1
-        # filter_dict['ipNroDecoration:ipNro'] = ''
-        # filter_dict['docPrincipalEditorTextArea'] = u'<p>peticao area</p>'
-        # filter_dict['context'] = '/pje'
-        # filter_dict['mimes'] = 'application/pdf'
-        # filter_dict['mimesEhSizes'] = 'application/pdf:3.0'
-        # filter_dict['modalConfirmaLimparOpenedState'] = ''
-        # filter_dict['modalErrosOpenedState'] = ''
-        # filter_dict['quantidadeProcessoDocumento'] = 0
-
-        # try:
-        #     save_peticao = self.session.post(
-        #         peticionar_url,
-        #         data=filter_dict,
-        #         headers=headers,
-        #         verify=False)
-        # except Exception:
-        #     raise Exception('Connection aborted. Line: 256.')
-
-        soup = BeautifulSoup(save_peticao.content, 'html.parser')
-        #Not implemented yet....
+        #Removed core code....
 
     def generate_pdf(self, content):
         html = '''
